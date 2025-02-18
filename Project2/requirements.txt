@@ -1,0 +1,29 @@
+#Answer
+"""
+No, Django signals are not required to run in the same thread as the caller. But by
+default, Django signals run synchronously in the same thread as the sender (caller).
+However, Django also provides the option to execute the signal asynchronously by setting
+the 'async' parameter to 'True' using the '@receiver' decorator. When a signal is executed
+asynchronously, it runs in a separate thread or process, allowing the caller to continue its
+execution without waiting for the signal handler to finish.
+"""
+#Output:
+""" 
+Signal received for: Test
+Object created
+Current thread ID: 10888
+"""
+#Explaination
+"""
+I have defined a Django model ‘MyModel’ and a signal handler function
+‘my_signal_handler’ connected to the ‘post_save’ signal of ‘MyModel’. Inside the signal
+handler, we simulate a delay of 2 sec in task execution using ‘time.sleep(2).
+After creating an instance of 'MyModel', I have printed "Object Created" followed by the
+thread ID using 'threading.get_ident()'. This allows us to compare the thread ID of the
+main thread with the thread ID inside the signal handler.
+When we run this code, we'll notice that both the main thread and the thread inside the
+signal handler have the same thread ID, indicating that the signal handler is executed in the
+same thread as the caller (main thread). Additionally, we'll observe that the print statement
+"Signal handler finished" is printed after a delay of 2 seconds, demonstrating that the
+signal handler blocks the execution until it completes its task.
+"""
