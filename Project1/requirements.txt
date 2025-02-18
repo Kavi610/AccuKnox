@@ -1,0 +1,24 @@
+#Answer
+"""
+Yes.
+By default,Django signals execute synchronously. This means that when a signal is sent, the connected receivers are executed one by one in the same order in which they
+were connected, and the signal sender waits for all receivers to finish before continuing execution.
+A synchronous signal is sent and controlled immediately when the event occurs, before the
+sender resumes its execution. After the sender completes its execution, an asynchronous
+signal is sent and handled later. Depending on the use case, Django provides both types of
+signals.
+"""
+#
+"""
+Signal received for: Test
+Object created
+"""
+#Explaination
+"""
+I have defined a Django model ‘MyModel’ and a signal handler function
+‘my_signal_handler’ connected to the ‘post_save’ signal of ‘MyModel’.
+When a instace of ‘MyModel’ is created (obj = MyModel.object.create(name=”Test”)), a
+signal is sent and the signal handler is executed synchronously.
+The print statement will execute only after the object has been created and the signal
+handler completed.
+"""
